@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useForm } from "react-hook-form";
-import { Button, TextField } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import Styled from './login.styled';
 import { useAppDispatch } from '../../app/hooks'
 import { setUser } from '../../slices/user/userSlice'
@@ -14,6 +15,14 @@ const defaultFormValues = {
   password: "",
 }
 
+const ErrorIcon = () => {
+  return (
+    <InputAdornment position="end">
+      <ErrorOutlineIcon color="error"/>
+    </InputAdornment>
+  )
+}
+
 export default function LoginForm() {
   const [updatePost, loginData ] = useLoginMutation()
   const dispatch = useAppDispatch()
@@ -21,9 +30,6 @@ export default function LoginForm() {
 
   const { handleSubmit, register, setError, formState: { errors }, } = useForm<FormValues>({ defaultValues: defaultFormValues });
 
-  /**
-   * TODO save accessToken in cookie insted of store
-   */
   useEffect(()=> {
 
     if(loginData?.data?.accessToken){
@@ -45,7 +51,7 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Styled.Fields>
-            <TextField 
+            <Styled.Input
                 label="Email" 
                 type="email"
                 {...register("email", { 
@@ -57,21 +63,26 @@ export default function LoginForm() {
                 })}
                 error={!!errors.email || errors?.password?.type === "server"}
                 helperText={errors.email?.message}
-                sx={{ mt: 4,  maxWidth: '400px' }} 
+                InputProps={{
+                  endAdornment: (!!errors.email || errors?.password?.type === "server") && <ErrorIcon/>,
+                }}
             /> 
-            <TextField 
+            <Styled.Input 
                 label="Password" 
                 type="password"
                 {...register("password", { required: "Password is required" })}
                 error={!!errors.password}
                 helperText={errors.password?.message}
-                sx={{ mt: 4,  maxWidth: '400px' }} 
+                InputProps={{
+                  endAdornment: !!errors.password && <ErrorIcon/>,
+                }}
             />
-            <Button>Forgot your password?</Button>
-            <Styled.Submit fullWidth sx={{ mt: 4, mb: 4, clear: 'both' }} type="submit">
-                Log in
-            </Styled.Submit>
         </Styled.Fields>
+        <Styled.ForgetPassword>Forgot your password?</Styled.ForgetPassword>
+        <Styled.Submit fullWidth sx={{ mt: 6, mb: 4, clear: 'both' }} type="submit">
+            Log in
+        </Styled.Submit>
+       
     </form>
   )
 }

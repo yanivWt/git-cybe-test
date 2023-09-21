@@ -35,34 +35,9 @@ const theme = createTheme({
             span: {
               display: 'none',
             },
-          },
+          }
         },
       },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: '#4D4D4D',
-          fontSize: '14px',
-          fontWeight: 400,
-          letterSpacing: '0.25px',
-          paddingLeft: '16px',
-        },
-      },
-    },
-    MuiInputBase: {
-      styleOverrides: {
-        input: {
-          padding: '4px 16px'
-        }
-      }
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        input: {
-          padding: '13px 16px;'
-        }
-      }
     },
     MuiFormControl: {
       styleOverrides: {
@@ -86,23 +61,27 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           minWidth: 'unset',
-          color: 'gray'
+          color: ' #4d4d4d',
+          borderRadius: '4px',
+          '&:hover': {
+            backgroundColor: '#4d4d4d14',
+          },
         },
       },
     },
   },
   palette: {
     primary: {
-      main: '#556cd6', // Redefine
+      main: '#27262A', // Redefine
     },
     secondary: {
-      main: '#19857b', // Redefine
+      main: '#BAA182', // Redefine
     },
     error: {
-      main: '#ff0000', // Redefine
+      main: '#BA1A1A', // Redefine
     },
     background: {
-      default: '#e0e0e0', // Redefine
+      default: '#F9F9FA', // Redefine
     },
   },
 });
