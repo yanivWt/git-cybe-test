@@ -115,7 +115,7 @@ const Input = styled(TextField)`
         align-items: center;
         gap: 4px;
         position: absolute;
-        top: -19px;
+        top: -20px;
         color: #4D4D4D;
         font-size: 14px;
         line-height: 20px;

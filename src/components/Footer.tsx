@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import Styled from './footer.styled';
 
 export default function Login() {
